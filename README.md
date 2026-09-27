@@ -70,7 +70,6 @@
 
 默认输入模式 `PANGU_STREAMED_MODEL_INPUT=1`：先组装 4 个地表量和 3 个静态场并做 2D embedding，再组装 65 个高空量做 3D embedding，释放各阶段输入后合并特征。默认输出模式 `PANGU_OUTPUT_PIPELINE=1`、`PANGU_OUTPUT_TRANSFER_CHUNK=8`，在两个 pinned CPU buffer 间轮换，使 FP16→FP32 affine、GPU 到 CPU 拷贝按通道块流水执行，最终同步后才结束计时。原 PDF 记录流式输入与原路径的 10 个完整输出逐字节一致；仓库没有附上该回归测试数据。
 
-另有两个存在但默认不可用的执行模式：`EXECUTION_MODE=cuda_graph`（CUDA Graph 封装）与默认开启的流式输入互斥，默认配置下走不到；`PANGU_WARMUP_STEPS` 仅为打印用途，实际 warmup 只有 CUDA Graph runner 内的两次前向。
 
 ## 环境、使用和复现边界
 
